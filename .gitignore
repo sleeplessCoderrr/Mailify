@@ -1,5 +1,2 @@
-node_modules
-package.json
-package-lock.json
-tsconfig.json
-.venv
+/node_modules
+/src-model/.venv
