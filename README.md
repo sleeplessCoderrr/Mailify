@@ -9,7 +9,7 @@ A full-stack application that uses a machine learning model for text prediction 
 2. Install dependencies: `pip install -r requirements.txt`.
 3. Run the backend server: `python app.py`.
 
-### Frontend (React + TypeScript)
+### Frontend (Svelte + TypeScript)
 1. Navigate to the `frontend/` folder.
 2. Install dependencies: `npm install`.
 3. Run the frontend server: `npm start`.

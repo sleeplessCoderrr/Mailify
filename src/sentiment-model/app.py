@@ -15,7 +15,7 @@ unique_tokens = history['unique_tokens']
 unique_token_index = {token: idx for idx, token in enumerate(unique_tokens)}
 n_words = 10
 
-# Initialize Flask app
+# Initialize Flask appko
 app = Flask(__name__)
 
 # Prediction function
