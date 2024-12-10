@@ -1,2 +1,2 @@
-/node_modules
-/src-model/.venv
+sentiment-back/.venv
+sentiment-front/node_modules
