@@ -1,7 +1,11 @@
 <script lang="ts">
     import Navbar from "../components/Navbar.svelte";
+    import Footer from "../components/Footer.svelte";
+    import ComputerScene from "../components/interactivity/ComputerScene.svelte";
 </script>
 
-<main>
+<div>
+    <ComputerScene/>
     <Navbar/>
-</main>
+    <Footer/>
+</div>
