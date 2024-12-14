@@ -10,6 +10,6 @@
     </Route>
     <Route path="/mailing">
         <Mailing/>
-    </Route>/
+    </Route>
 </Router>
 
