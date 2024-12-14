@@ -6,7 +6,9 @@
     <div class="flex flex-row items-center justify-center"
         style="
         width: 50vw;
-        height: 65vh;">
+        height: 65vh;
+        position: absolute;
+        top: 20vh">
         <SplineScene/>
     </div>
 </div>

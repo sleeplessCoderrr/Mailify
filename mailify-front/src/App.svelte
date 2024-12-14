@@ -6,7 +6,7 @@
 
 <Router>
     <Route path="/">
-        <Home />
+        <Home/>
     </Route>
     <Route path="/mailing">
         <Mailing/>
