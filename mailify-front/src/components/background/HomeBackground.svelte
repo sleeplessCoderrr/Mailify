@@ -8,7 +8,7 @@
         width: 50vw;
         height: 65vh;
         position: absolute;
-        top: 20vh">
+        top: 30vh">
         <SplineScene/>
     </div>
 </div>

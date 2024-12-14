@@ -9,9 +9,10 @@
     <main class="flex-column w-full items-center justify-items-center">
         <Navbar/>
 
-        <div class="flex-column">
-            <p>KNOW EVERY PARAMETER IN EASY REACH</p>
-            <h1>Control Your Car Via Your Phone</h1>
+        <div class="flex-column justify-items-center">
+            <p class="text-base my-4 font-medium">KNOW EVERY PARAMETER IN EASY REACH</p>
+            <p class="text-8xl  my-6 font-semibold">Control Your Car</p>
+            <p class="text-8xl  my-6 font-medium">Via Your Phone</p>
         </div>
 
         <Footer/>
