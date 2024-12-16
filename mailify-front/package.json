@@ -25,6 +25,7 @@
   "dependencies": {
     "@splinetool/runtime": "^1.9.48",
     "svelte-routing": "^2.13.0",
-    "three": "^0.171.0"
+    "three": "^0.171.0",
+    "typewriter-effect": "^2.21.0"
   }
 }
