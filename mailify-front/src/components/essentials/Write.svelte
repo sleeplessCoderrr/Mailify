@@ -1,5 +1,5 @@
 <script lang="ts">
-    import BoltLogo from "./icon/BoltLogo.svelte";
+    import BoltLogo from "./icon/BoltIcon.svelte";
 </script>
 
 <span class="text-blaze inline-flex items-center gap-0">

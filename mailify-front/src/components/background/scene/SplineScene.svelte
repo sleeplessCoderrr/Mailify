@@ -10,5 +10,5 @@
 
 <canvas
     bind:this={canvas}
-    style="z-index: -1">
+    style="z-index: -10">
 </canvas>
