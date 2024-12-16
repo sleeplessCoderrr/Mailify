@@ -2,10 +2,10 @@
     import Navbar from "../components/Navbar.svelte";
     import Footer from "../components/Footer.svelte";
     import HomeBackground from "../components/background/HomeBackground.svelte";
-    import MailLogo from "../components/essentials/icon/MailIcon.svelte";
-    import Write from "../components/essentials/Write.svelte";
-    import TypeWriter from "../components/essentials/TypeWriter.svelte";
-    import EmailLetter from "../components/essentials/EmailLetter.svelte";
+    import MailLogo from "../components/icon/MailIcon.svelte";
+    import Write from "../components/home/Write.svelte";
+    import TypeWriter from "../components/home/TypeWriter.svelte";
+    import EmailLetter from "../components/home/EmailLetter.svelte";
 </script>
 
 <div class="flex-col justify-items-center items-center w-full font-helvetica">

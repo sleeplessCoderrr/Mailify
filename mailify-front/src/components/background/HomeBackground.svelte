@@ -1,5 +1,5 @@
 <script lang="ts">
-    import SplineScene from "./scene/SplineScene.svelte";
+    import SplineScene from "../model/SplineScene.svelte";
 </script>
 
 <div class="flex flex-row items-center justify-center">

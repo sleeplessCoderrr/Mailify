@@ -9,7 +9,7 @@
         <p class="font-bold text-3xl">Mailify</p>
     </div>
 
-    <div class="items-center">
+    <div class="items-center bg-mist/20 py-2 px-12 rounded-md backdrop-blur-sm shadow-md border-2">
         <ul class="flex gap-8">
             <a href="#" class="no-underline">Features</a>
             <a href="#" class="no-underline">Privacy Policy</a>
@@ -19,9 +19,10 @@
     </div>
 
     <div class="items-center">
-        <p class="font-medium text-base font-helvetica
-                  border-solid border-2 border-black
-                  rounded-2xl py-2 px-4
-                  bg-blaze text-midnight">Get Started Free</p>
+        <p class="font-medium text-midnight font-helvetica
+                  border-solid border-2 border-midnight
+                  rounded-md py-2 px-4
+                  bg-blaze/80 backdrop-blur shadow-md
+                  ">Get Started Free</p>
     </div>
 </header>

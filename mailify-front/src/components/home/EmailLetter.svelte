@@ -1,6 +1,6 @@
 <script lang="ts">
-    import MailLogo from "./icon/MailIcon.svelte";
-    import RightArrowIcon from "./icon/RightArrowIcon.svelte";
+    import MailLogo from "../icon/MailIcon.svelte";
+    import RightArrowIcon from "../icon/RightArrowIcon.svelte";
 </script>
 
 <div class="flex flex-col z-1 w-5/12 justify-items-center gap-4">
@@ -19,6 +19,8 @@
         </button>
     </div>
     <div class="shadow-sm">
-        <p class="text-midnight">We'll never spam you. <a href="#" class="no-underline hover:underline">See our privacy policy</a> </p>
+        <p class="text-midnight">We'll never spam you.
+            <a href="#" class="no-underline hover:underline">See our privacy policy</a>
+        </p>
     </div>
 </div>
