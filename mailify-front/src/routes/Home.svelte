@@ -25,7 +25,7 @@
                           "TRANSFORM YOUR EMAILS, OPEN DOORS TO SUCCESS",
                           "TRANSFORM YOUR EMAILS, CAPTURE THE ATTENTION YOU DESERVE"
                         ]}
-                        speed={80}
+                        speed={60}
                         loop={true}
                     />
                 </p>
