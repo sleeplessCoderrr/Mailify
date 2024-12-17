@@ -1,14 +1,17 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import type {Request} from "../lib/interfaces/Request";
+    import MailingBackground from "../components/background/MailingBackground.svelte";
 
-    let name = "";
-    let receiver = "";
-    let emailGoals = "";
+    let request: Request = {
+        name: "",
+        receiver: "",
+        emailGoals: "",
+        activeCategory: ""
+    }
 
-    const categories: string[] = ["Outreach", "Walmart Discount", "Cancel Netflix", "Business"];
-    let activeCategory: string = "Outreach";
-
-    let activeTab: "send" | "reply" = "send"; // Track active tab
+    const categories: string[] = ["Applying Job", "College"];
+    let activeCategory: string = "Applying Job";
+    let activeTab: "send" | "reply" = "send";
 
     function setActiveCategory(category: string) {
         activeCategory = category;
@@ -16,46 +19,40 @@
 
     function handleSubmit() {
         console.log({
-            name,
-            receiver,
-            emailGoals,
-            activeCategory,
-            activeTab
+            request: Request,
         });
         alert("Email content generated!");
     }
 </script>
 
-<!-- Page Container -->
-<div class="min-h-screen bg-gray-50 text-gray-900 p-6">
-    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-8">
+<div class="min-h-screen text-midnight font-helvetica p-6 justify-items-center items-center">
+    <MailingBackground/>
+    <div class="max-w-4xl mx-auto rounded-lg p-8
+                bg-white/40 shadow-lg backdrop-blur">
 
-        <!-- Tab Navigation -->
         <div class="flex space-x-4 border-b pb-4">
             <button
-                    class={`py-2 px-4 rounded ${activeTab === 'send' ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-600'}`}
+                    class={`py-2 px-4 rounded ${activeTab === 'send' ? 'bg-blaze text-white' : 'bg-mist text-midnight'}`}
                     on:click={() => activeTab = 'send'}
             >
                 Send Email
             </button>
             <button
-                    class={`py-2 px-4 rounded ${activeTab === 'reply' ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-600'}`}
+                    class={`py-2 px-4 rounded ${activeTab === 'reply' ? 'bg-blaze text-white' : 'bg-mist text-midnight'}`}
                     on:click={() => activeTab = 'reply'}
             >
                 Reply Email
             </button>
         </div>
 
-        <!-- Content based on active tab -->
         {#if activeTab === 'send'}
-            <!-- Send Email Form -->
             <div class="mt-6">
                 <label class="block text-sm font-medium">Your Name</label>
                 <input
                         class="w-full mt-1 p-2 border rounded"
                         type="text"
                         placeholder="e.g., John Davis"
-                        bind:value={name}
+                        bind:value={request.name}
                 />
 
                 <label class="block mt-4 text-sm font-medium">To (Receiver)</label>
@@ -63,25 +60,24 @@
                         class="w-full mt-1 p-2 border rounded"
                         type="text"
                         placeholder="e.g., Elon Musk"
-                        bind:value={receiver}
+                        bind:value={request.receiver}
                 />
 
                 <label class="block mt-4 text-sm font-medium">What’s your email goal? Key points:</label>
                 <textarea
                         class="w-full mt-1 p-2 border rounded h-32"
                         placeholder="Write your email goals here..."
-                        bind:value={emailGoals}
+                        bind:value={request.emailGoals}
                 ></textarea>
             </div>
         {:else if activeTab === 'reply'}
-            <!-- Reply Email Form -->
             <div class="mt-6">
                 <label class="block text-sm font-medium">Your Name</label>
                 <input
                         class="w-full mt-1 p-2 border rounded"
                         type="text"
                         placeholder="e.g., John Davis"
-                        bind:value={name}
+                        bind:value={request.name}
                 />
 
                 <label class="block mt-4 text-sm font-medium">To (Receiver)</label>
@@ -89,26 +85,25 @@
                         class="w-full mt-1 p-2 border rounded"
                         type="text"
                         placeholder="e.g., Elon Musk"
-                        bind:value={receiver}
+                        bind:value={request.receiver}
                 />
 
                 <label class="block mt-4 text-sm font-medium">What’s your reply about? Key points:</label>
                 <textarea
                         class="w-full mt-1 p-2 border rounded h-32"
                         placeholder="Write your reply key points here..."
-                        bind:value={emailGoals}
+                        bind:value={request.emailGoals}
                 ></textarea>
             </div>
         {/if}
 
-        <!-- Categories Section -->
         <div class="flex space-x-4 mt-6">
             {#each categories as category}
                 <button
                         class={`py-2 px-4 rounded ${
                         activeCategory === category
-                            ? "bg-purple-600 text-white"
-                            : "bg-gray-200 text-gray-600"
+                            ? "bg-blaze text-white"
+                            : "bg-mist text-midnight"
                     }`}
                         on:click={() => setActiveCategory(category)}
                 >
@@ -117,9 +112,8 @@
             {/each}
         </div>
 
-        <!-- Submit Button -->
         <button
-                class="mt-6 w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700"
+                class="mt-6 w-full bg-blaze/80 text-white py-2 rounded hover:bg-blaze ease-in-out duration-300"
                 on:click={handleSubmit}
         >
             Generate Email
