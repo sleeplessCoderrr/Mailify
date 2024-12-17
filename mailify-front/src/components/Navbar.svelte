@@ -1,6 +1,11 @@
 <script lang="ts">
     import logoDark from '../assets/mailify-dark.png'
     import logoLight from '../assets/mailify-light.png'
+    import {navigate} from "svelte-routing";
+
+    function goToMailing(){
+        navigate("/mailing");
+    }
 </script>
 
 <header class="flex flex-row gap-48 justify-evenly items-center h-36 mx-auto font-helvetica">
@@ -19,10 +24,11 @@
     </div>
 
     <div class="items-center">
-        <p class="font-medium text-midnight font-helvetica
+        <button class="font-medium text-midnight font-helvetica
                   border-solid border-2 border-midnight
                   rounded-md py-2 px-4
                   bg-blaze/80 backdrop-blur shadow-md
-                  ">Get Started Free</p>
+                  hover:bg-blaze ease-in-out duration-300"
+                  on:click={goToMailing()}>Get Started Free</button>
     </div>
 </header>
