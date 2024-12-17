@@ -1,5 +1,6 @@
 <script lang="ts">
     import type {Request} from "../lib/interfaces/Request";
+    import Navbar from "../components/Navbar.svelte";
     import MailingBackground from "../components/background/MailingBackground.svelte";
 
     let request: Request = {
@@ -25,20 +26,23 @@
     }
 </script>
 
-<div class="min-h-screen text-midnight font-helvetica p-6 justify-items-center items-center">
+<div class="min-h-screen bg-transparent text-midnight font-helvetica justify-items-center items-center">
     <MailingBackground/>
-    <div class="max-w-4xl mx-auto rounded-lg p-8
-                bg-white/40 shadow-lg backdrop-blur">
+    <Navbar/>
+
+    <div class="max-w-4xl mx-auto mt-16 p-8
+                bg-white/20 shadow-lg backdrop-blur-sm
+                rounded-md border-2 border-stone-300">
 
         <div class="flex space-x-4 border-b pb-4">
             <button
-                    class={`py-2 px-4 rounded ${activeTab === 'send' ? 'bg-blaze text-white' : 'bg-mist text-midnight'}`}
+                    class={`py-2 px-4 rounded border-2 border-stone-300 ${activeTab === 'send' ? 'bg-blaze text-white' : 'bg-mist text-midnight'}`}
                     on:click={() => activeTab = 'send'}
             >
                 Send Email
             </button>
             <button
-                    class={`py-2 px-4 rounded ${activeTab === 'reply' ? 'bg-blaze text-white' : 'bg-mist text-midnight'}`}
+                    class={`py-2 px-4 rounded border-2 border-stone-300 ${activeTab === 'reply' ? 'bg-blaze text-white' : 'bg-mist text-midnight'}`}
                     on:click={() => activeTab = 'reply'}
             >
                 Reply Email
@@ -49,7 +53,7 @@
             <div class="mt-6">
                 <label class="block text-sm font-medium">Your Name</label>
                 <input
-                        class="w-full mt-1 p-2 border rounded"
+                        class="w-full mt-1 p-2 rounded border-2 border-stone-300 outline-none"
                         type="text"
                         placeholder="e.g., John Davis"
                         bind:value={request.name}
@@ -57,7 +61,7 @@
 
                 <label class="block mt-4 text-sm font-medium">To (Receiver)</label>
                 <input
-                        class="w-full mt-1 p-2 border rounded"
+                        class="w-full mt-1 p-2 rounded border-2 border-stone-300 outline-none"
                         type="text"
                         placeholder="e.g., Elon Musk"
                         bind:value={request.receiver}
@@ -65,7 +69,7 @@
 
                 <label class="block mt-4 text-sm font-medium">What’s your email goal? Key points:</label>
                 <textarea
-                        class="w-full mt-1 p-2 border rounded h-32"
+                        class="w-full mt-1 p-2 rounded border-2 border-stone-300 outline-none h-32"
                         placeholder="Write your email goals here..."
                         bind:value={request.emailGoals}
                 ></textarea>
@@ -74,15 +78,15 @@
             <div class="mt-6">
                 <label class="block text-sm font-medium">Your Name</label>
                 <input
-                        class="w-full mt-1 p-2 border rounded"
+                        class="w-full mt-1 p-2 rounded border-2 border-stone-300 outline-none"
                         type="text"
                         placeholder="e.g., John Davis"
                         bind:value={request.name}
                 />
 
-                <label class="block mt-4 text-sm font-medium">To (Receiver)</label>
+                <label class="block mt-4 text-sm font-medium">To (Sender )</label>
                 <input
-                        class="w-full mt-1 p-2 border rounded"
+                        class="w-full mt-1 p-2 rounded border-2 border-stone-300 outline-none"
                         type="text"
                         placeholder="e.g., Elon Musk"
                         bind:value={request.receiver}
@@ -90,7 +94,7 @@
 
                 <label class="block mt-4 text-sm font-medium">What’s your reply about? Key points:</label>
                 <textarea
-                        class="w-full mt-1 p-2 border rounded h-32"
+                        class="w-full mt-1 p-2 rounded border-2 border-stone-300 outline-none h-32"
                         placeholder="Write your reply key points here..."
                         bind:value={request.emailGoals}
                 ></textarea>
@@ -100,7 +104,7 @@
         <div class="flex space-x-4 mt-6">
             {#each categories as category}
                 <button
-                        class={`py-2 px-4 rounded ${
+                        class={`py-2 px-4 rounded border-2 border-stone-300 ${
                         activeCategory === category
                             ? "bg-blaze text-white"
                             : "bg-mist text-midnight"
@@ -110,6 +114,18 @@
                     {category}
                 </button>
             {/each}
+        </div>
+
+        <div class="flex space-x-4 mt-6 text-midnight">
+            {#if activeCategory === 'Applying Job'}
+                <p>
+                    This category is for generating emails related to <b>job applications</b>. It can help you write emails expressing interest in a position, introducing yourself to potential employers, or following up on job opportunities.
+                </p>
+            {:else if activeCategory === 'College'}
+                <p>
+                    This category is for emails related to <b> college applications, admissions inquiries, or academic matters.</b> It can assist in writing emails to admissions offices, asking about programs, or following up on application statuses.
+                </p>
+            {/if}
         </div>
 
         <button

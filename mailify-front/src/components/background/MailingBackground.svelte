@@ -31,14 +31,14 @@
     }
 
     function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-        ctx.fillStyle = "rgba(255, 255, 255, 0.7)"; // Set particle color
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.2)"; // Line color
-        ctx.lineWidth = 0.5; // Make lines thin
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "rgba(255, 99, 74, 0.8)";
+        ctx.strokeStyle = "rgba(35, 33, 33, 0.1)";
+        ctx.lineWidth = 0.5;
 
         particles.forEach((p, index) => {
             ctx.beginPath();
-            ctx.arc(p.x, p.y, 2, 0, Math.PI * 2); // Draw circle for each particle
+            ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
             ctx.fill();
 
             let closestDistance = Infinity;
@@ -72,7 +72,7 @@
     }
 </script>
 
-<canvas bind:this={canvas} class="fixed top-0 left-0 z-[-1]" />
+<canvas bind:this={canvas} class="fixed top-0 left-0 z-[-1] bg-mist" />
 
 <style>
     canvas {
@@ -81,7 +81,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #2e2e2e; /* Background color */
-        pointer-events: none; /* Allow interaction with elements on top */
+        pointer-events: none;
     }
 </style>
