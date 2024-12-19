@@ -29,7 +29,6 @@
         request.purpose = activeTab;
         request.goalCategories = activeCategory;
         
-        console.log(request);
         try {
             const generatedEmail = await GenerateEmail(request);
             // ## To Do: Display the generated email in a modal or a new page.
