@@ -1,4 +1,4 @@
-# Text Prediction and Sentiment Analysis
+# Email Generator Web APP
 
 A full-stack application that uses a machine learning model for text prediction and sentiment analysis.
 
