@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS  
-from email_generator import generate_job_application_email
+from email_generator import generate_job_application_email, Request
 
 app = Flask(__name__)
 CORS(app, origins=["http://localhost:5173"])
@@ -11,12 +11,15 @@ def generate_email():
         data = request.json
         if not data:
             return jsonify({'error': 'Invalid request. No data provided.'}), 400
-        sender_name = data.get('sender_name', 'Your Name')
-        receiver_name = data.get('receiver_name', 'Recipient')
-        main_point = data.get('main_point', 'I would like to apply for a job at your company.')
-        max_length = data.get('max_length', 150)
         
-        generated_email = generate_job_application_email(sender_name, receiver_name, main_point, max_length)
+        purpose = data.get('purpose')
+        name = data.get('name')
+        receiver = data.get('receiver')
+        goalCategories = data.get('goalCategories')
+        emailAbout = data.get('emailAbout')
+        
+        request = Request(purpose, name, receiver, goalCategories, emailAbout)
+        generated_email = generate_email(request)
         return jsonify({'generated_email': generated_email}), 200
     
     except Exception as e:
