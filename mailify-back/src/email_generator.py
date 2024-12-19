@@ -1,4 +1,4 @@
-# Depedencies and model loading
+# Dependencies and model loading
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
 model_path = "../model/email_generator/"
@@ -8,7 +8,7 @@ generator = pipeline('text-generation', model=model, tokenizer=tokenizer)
 
 # Request class
 class Request:
-    def __init__ (self, purpose, name, receiver, goalCategories, emailAbout):
+    def __init__(self, purpose, name, receiver, goalCategories, emailAbout):
         self.purpose = purpose
         self.name = name
         self.receiver = receiver
@@ -16,48 +16,26 @@ class Request:
         self.emailAbout = emailAbout 
 
 # Email Generator Function
-### TODO: Implement the generate_email function:
-'''
-functionnya udah kepanggil sama api kalo user minta request, nah tolong dong olah datanya, jadi lu bikinin prompnya manual berdasarkan 
-purposenya dan goalCategoriesnya, dan email aboutnya terus lu generate emailnya pake model yang udah di load di atas, terus return hasilnya.
-bikinnya didalam file ini ajah, dibawah" ini gapapa
-'''
-def generate_email(request:Request):
-    
-    
+def request_invoker(request: Request):
+    # Construct the prompt for the model
     prompt = f"""
     Write an email applying for a job:
 
-    Dear {receiver_name},
+    Dear {request.receiver},
 
-    {main_point}
+    {request.emailAbout}
 
     Sincerely,
-    {sender_name}
+    {request.name}
     """
 
+    # Generate the email using the loaded model
     result = generator(
         prompt,
-        max_length=max_length,
-        do_sample=False,
+        max_length=200,  # Specify a max length to avoid overly long generations
+        do_sample=True,  # Enable sampling for more creative outputs
         early_stopping=True,
     )
 
+    # Return the generated text
     return result[0]['generated_text']
-
-
-def generate_job_application_email(request:Request):
-    receiver_name = request.receiver
-    sender_name = request.name
-    main_point = f"I am writing to apply for the {request.purpose} position. I am confident that my {', '.join(request.goalCategories)} skills make me a perfect fit for this role."
-    max_length = 200
-
-    return generate_email(request)
-
-def generate_college_email(request:Request):
-    receiver_name = request.receiver
-    sender_name = request.name
-    main_point = f"I am writing to apply for the {request.purpose} program. I am confident that my {', '.join(request.goalCategories)} skills make me a perfect fit for this program."
-    max_length = 200
-
-    return generate_email(request)
