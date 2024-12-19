@@ -1,16 +1,21 @@
 <script lang="ts">
     import './app.css';
-    import { Router, Route } from "svelte-routing";
     import Home from "./routes/Home.svelte";
+    import { Router, Route } from "svelte-routing";
     import EmailGenerator from "./routes/EmailGenerator.svelte";
+    import TransitionWrapper from "./components/ui/TransitionWrapper.svelte";
 </script>
 
 <Router>
     <Route path="/">
-        <Home/>
+        <TransitionWrapper duration={300}>
+            <Home/>
+        </TransitionWrapper>
     </Route>
     <Route path="/mailing">
-        <EmailGenerator/>
+        <TransitionWrapper duration={300}>
+            <EmailGenerator/>
+        </TransitionWrapper>
     </Route>
 </Router>
 

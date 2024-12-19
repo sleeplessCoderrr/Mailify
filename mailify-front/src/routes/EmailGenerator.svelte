@@ -1,5 +1,7 @@
 <script lang="ts">
-    import type {Request} from "../lib/interfaces/Request";
+    import type { Request } from "../lib/interfaces/Request";
+    import { GenerateEmail } from "../lib/request/GenerateEmail";
+    import { EmailPromptBuilder } from "../lib/request/EmailPromptBuilder";
 
     import Navbar from "../components/Navbar.svelte";
     import InputForm from "../components/email-generator/InputForm.svelte";
@@ -23,9 +25,15 @@
         activeCategory = category;
     }
 
-    function handleSubmit() {
-        console.log(request);
-        alert("Email content generated!");
+    async function handleSubmit() {
+        try {
+            const { userPrompt, start } = EmailPromptBuilder(request, activeTab);
+            const generatedEmail = await GenerateEmail(userPrompt, start);
+
+            alert("Email content generated successfully!");
+        } catch (error) {
+            alert("Something went wrong while generating the email.");
+        }
     }
 </script>
 
@@ -33,19 +41,17 @@
     <MailingBackground />
     <Navbar />
 
-    <div class="max-w-4xl mx-auto mt-16 p-8 bg-white/20 shadow-lg backdrop-blur-sm rounded-md border-2 border-stone-300">
+    <div class="max-w-screen-md mx-auto mt-10 p-8 bg-white/20 shadow-lg backdrop-blur-sm rounded-md border-2 border-stone-300">
         <TabSelector activeTab={activeTab} setActiveTab={(tab) => (activeTab = tab)} />
         <InputForm activeTab={activeTab} request={request} />
         <CategorySelector
             categories={categories}
             activeCategory={activeCategory}
-            setActiveCategory={setActiveCategory}
-        />
+            setActiveCategory={setActiveCategory}/>
         <CategoryDescription activeCategory={activeCategory} />
         <button
-                class="mt-6 w-full bg-blaze/80 text-white py-2 rounded hover:bg-blaze ease-in-out duration-300"
-                on:click={handleSubmit}
-        >
+            class="mt-6 w-full bg-blaze/80 text-white py-2 rounded hover:bg-blaze ease-in-out duration-300"
+            on:click={handleSubmit}>
             Generate Email
         </button>
     </div>
