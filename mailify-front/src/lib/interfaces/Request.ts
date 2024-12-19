@@ -1,8 +1,9 @@
 export interface Request {
+    purpose?: "send" | "reply" | null,
     name:string,
     receiver:string,
-    emailGoals:string,
-    activeCategory:string,
+    goalCategories:string,
+    emailAbout:string,
 }
 
 

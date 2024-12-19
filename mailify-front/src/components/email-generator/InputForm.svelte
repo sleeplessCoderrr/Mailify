@@ -30,6 +30,6 @@
     <textarea
             class="w-full mt-1 p-2 rounded border-2 border-stone-300 outline-none h-32"
             placeholder={activeTab === "send" ? "Write your email goals here..." : "Write your reply key points here..."}
-            bind:value={request.emailGoals}
+            bind:value={request.emailAbout}
     ></textarea>
 </div>

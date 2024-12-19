@@ -1,7 +1,6 @@
 <script lang="ts">
     import type { Request } from "../lib/interfaces/Request";
     import { GenerateEmail } from "../lib/request/GenerateEmail";
-    import { EmailPromptBuilder } from "../lib/request/EmailPromptBuilder";
 
     import Navbar from "../components/Navbar.svelte";
     import InputForm from "../components/email-generator/InputForm.svelte";
@@ -11,10 +10,11 @@
     import CategoryDescription from "../components/email-generator/CategoryDescription.svelte";
 
     let request:Request = {
+        purpose: null,
         name: "",
         receiver: "",
-        emailGoals: "",
-        activeCategory: "",
+        goalCategories: "",
+        emailAbout: "",
     };
 
     const categories = ["Applying Job", "College"];
@@ -26,13 +26,16 @@
     }
 
     async function handleSubmit() {
+        request.purpose = activeTab;
+        request.goalCategories = activeCategory;
+        
+        console.log(request);
         try {
-            const { userPrompt, start } = EmailPromptBuilder(request, activeTab);
-            const generatedEmail = await GenerateEmail(userPrompt, start);
+            const generatedEmail = await GenerateEmail(request);
+            // ## To Do: Display the generated email in a modal or a new page.
 
-            alert("Email content generated successfully!");
         } catch (error) {
-            alert("Something went wrong while generating the email.");
+            console.log("Something went wrong while generating the email.");
         }
     }
 </script>

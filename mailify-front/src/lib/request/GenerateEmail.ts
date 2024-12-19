@@ -1,26 +1,24 @@
-export async function GenerateEmail(userPrompt: string, start: string): Promise<string> {
-    try {
-        const payload = {
-            user_prompt: userPrompt,
-            start: start,
-        };
+import axios from 'axios';
+import type { Request } from "../interfaces/Request";
 
-        const response = await fetch("http://localhost:5000/generate-email", {
-            method: "POST",
+export async function GenerateEmail(request: Request): Promise<string> {
+    try {
+        const response = await axios.post("http://localhost:5000/generate-email", request, {
             headers: {
                 "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
+            }
         });
 
-        if (!response.ok) {
+        const data = response.data;
+
+        if (data != null) {
+            return data.email;
+        } else {
             throw new Error("Failed to generate email");
         }
-
-        const data = await response.json();
-        return data.email || "No email generated. Please try again.";
+        
     } catch (error) {
-        console.error("Error:");
+        console.error("Error:", error);
         throw error;
     }
 }
