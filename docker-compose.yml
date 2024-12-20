@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./mailify-back
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mailify-back:/app
+    environment:
+      - FLASK_ENV=development
+
+  frontend:
+    build:
+      context: ./mailify-front
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./mailify-front:/app
