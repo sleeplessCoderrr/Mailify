@@ -3,17 +3,18 @@
     import type {Response} from "../lib/interfaces/Response";
     import type { FunFact } from "../lib/interfaces/FunFact";
 
+    import { navigate } from "svelte-routing";
     import { getRandomFunFact } from "../lib/interfaces/FunFact";
     import { GenerateEmail } from "../lib/request/GenerateEmail";
 
     import Navbar from "../components/Navbar.svelte";
+    import ErrorModal from "../components/ui/ErrorModal.svelte";
     import LoadingSpinner from "../components/ui/LoadingSpinner.svelte";
     import InputForm from "../components/email-generator/InputForm.svelte";
     import TabSelector from "../components/email-generator/TabSelector.svelte";
     import MailingBackground from "../components/background/MailingBackground.svelte";
     import CategorySelector from "../components/email-generator/CategorySelector.svelte";
     import CategoryDescription from "../components/email-generator/CategoryDescription.svelte";
-    import { navigate } from "svelte-routing";
 
     let request:Request = {
         purpose: null,
@@ -28,6 +29,10 @@
     const categories = ["Applying Job", "College"];
     let activeCategory: string = "Applying Job";
     let activeTab: "send" | "reply" = "send";
+
+    // For Error Modal
+    let showModal = false;
+    function showError() { showModal = true; }
 
     //For Loading Spinner
     let isLoading: boolean = false;
@@ -47,8 +52,8 @@
 
         if (!progressInterval) {
             progressInterval = setInterval(() => {
-                if (progress < 95) { 
-                    progress += Math.random() * 5; 
+                if (progress < 95) {
+                    progress += Math.random() * 5;
                 }
             }, 200);
         }
@@ -64,15 +69,19 @@
             request.goalCategories = activeCategory;
 
             const generatedEmail = await GenerateEmail(request);
-            // ## TODO: Handle response
+            // Handle response (e.g., store in a variable or navigate)
 
             console.log("Generated Email:", generatedEmail);
             completeProgress();
             goToResult();
         } catch (error) {
+            console.error("Error generating email:", error);
+            showError();
+        } finally {
             clearIntervals();
         }
     }
+
 
     function completeProgress() {
         progress = 100; 
@@ -97,6 +106,8 @@
 
 <div class="min-h-screen bg-transparent text-midnight font-helvetica">
     <LoadingSpinner isLoading={isLoading} progress={progress} funFact={randomFact.funFact} detail={randomFact.detail}/>
+    <ErrorModal bind:isVisible={showModal} title="Cannot Generate Email" message="Check your connection."/>
+
     <MailingBackground />
     <Navbar />
 
