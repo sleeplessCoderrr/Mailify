@@ -12,10 +12,12 @@
     import MailingBackground from "../components/background/MailingBackground.svelte";
     import CategorySelector from "../components/email-generator/CategorySelector.svelte";
     import CategoryDescription from "../components/email-generator/CategoryDescription.svelte";
+    import { navigate } from "svelte-routing";
 
     let request:Request = {
         purpose: null,
         name: "",
+        receiverMail: "",
         receiver: "",
         goalCategories: "",
         emailAbout: "",
@@ -31,36 +33,64 @@
     let progress: number = 0;
     let randomFact: FunFact = getRandomFunFact();
 
-    function setActiveCategory(category: string) {
-        activeCategory = category;
-    }
+    let progressInterval: ReturnType<typeof setInterval> | null = null;
+    let funFactInterval: ReturnType<typeof setInterval> | null = null;
+
+    function setActiveCategory(category: string) { activeCategory = category; }
+    function goToResult() { navigate("/page/result"); }
 
     async function handleSubmit() {
         isLoading = true;
-        request.purpose = activeTab;
-        request.goalCategories = activeCategory;
-        
-        try {
-            const generatedEmail = await GenerateEmail(request);
-            // ## To Do: Display the generated email in a modal or a new page.
+        progress = 0;
+        randomFact = getRandomFunFact();
 
+        if (!progressInterval) {
+            progressInterval = setInterval(() => {
+                if (progress < 95) { 
+                    progress += Math.random() * 5; 
+                }
+            }, 200);
+        }
+
+        if (!funFactInterval) {
+            funFactInterval = setInterval(() => {
+                randomFact = getRandomFunFact();
+            }, 5000);
+        }
+
+        try {
+            request.purpose = activeTab;
+            request.goalCategories = activeCategory;
+
+            const generatedEmail = await GenerateEmail(request); 
+            console.log("Generated Email:", generatedEmail);
+            completeProgress();
+            goToResult();
         } catch (error) {
-            console.log("Something went wrong while generating the email.");
+            console.error("Error generating email:", error);
+            clearIntervals();
         }
     }
 
-    let interval = setInterval(() => {
-        if (progress < 100) {
-            progress += Math.floor(Math.random() * (10 - 1 + 1)) + 1;
-            if (progress % 20 === 0) {
-                randomFact = getRandomFunFact(); 
-            }
-        } else {
-            clearInterval(interval);
-            isLoading = false; 
-            progress = 0;
+    function completeProgress() {
+        progress = 100; 
+        setTimeout(() => {
+            clearIntervals(); 
+        }, 500); 
+    }
+
+    function clearIntervals() {
+        if (progressInterval) {
+            clearInterval(progressInterval);
+            progressInterval = null;
         }
-    }, 500)
+        if (funFactInterval) {
+            clearInterval(funFactInterval);
+            funFactInterval = null;
+        }
+        isLoading = false;
+        progress = 0;
+    }
 </script>
 
 <div class="min-h-screen bg-transparent text-midnight font-helvetica">
@@ -68,7 +98,7 @@
     <MailingBackground />
     <Navbar />
 
-    <div class="max-w-screen-md mx-auto mt-10 p-8 bg-white/20 shadow-lg backdrop-blur-sm rounded-md border-2 border-stone-300">
+    <div class="max-w-screen-md mx-auto p-8 bg-white/20 shadow-lg backdrop-blur-sm rounded-md border-2 border-stone-300">
         <TabSelector activeTab={activeTab} setActiveTab={(tab) => (activeTab = tab)} />
         <InputForm activeTab={activeTab} request={request} />
         <CategorySelector
@@ -78,7 +108,7 @@
         <CategoryDescription activeCategory={activeCategory} />
         <button
             class="mt-6 w-full bg-blaze/80 text-white py-2 rounded hover:bg-blaze ease-in-out duration-300"
-            on:click={handleSubmit}>
+            on:click={handleSubmit()}>
             Generate Email
         </button>
     </div>

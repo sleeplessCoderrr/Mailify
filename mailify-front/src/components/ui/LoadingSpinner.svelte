@@ -17,9 +17,13 @@
         ></div>
     </div>
 
-    <div class="mt-48 absolute">
-        <p class="text-lg font-semibold text-midnight">{funFact}</p>
-        <p class="mt-1 text-sm text-midnight">{detail}</p>
+    <div class="mt-48 absolute animate-bounce">
+        <p class="text-lg font-semibold text-midnight">
+            {funFact}
+        </p>
+        <p class="mt-1 text-sm text-midnight">
+            {detail}
+        </p>
     </div>
 </div>
 {/if}

@@ -15,13 +15,23 @@
     />
 
     <label class="block mt-4 text-sm font-medium">
-        {activeTab === "send" ? "To (Receiver)" : "To (Sender)"}
+        {activeTab === "send" ? "Receiver Name" : "Sender Name"}
     </label>
     <input
             class="w-full mt-1 p-2 rounded border-2 border-stone-300 outline-none"
             type="text"
             placeholder={activeTab === "send" ? "e.g., Elon Musk" : "e.g., John Doe"}
             bind:value={request.receiver}
+    />
+
+    <label class="block mt-4 text-sm font-medium">
+        {activeTab === "send" ? "Receiver Email" : "Sender Email"}
+    </label>
+    <input
+            class="w-full mt-1 p-2 rounded border-2 border-stone-300 outline-none"
+            type="email"
+            placeholder={activeTab === "send" ? "e.g., elon@mail.com" : "e.g., john@mail.com"}
+            bind:value={request.receiverMail}
     />
 
     <label class="block mt-4 text-sm font-medium">

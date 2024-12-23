@@ -3,7 +3,7 @@
     import logoLight from '../assets/mailify-light.png'
     import {navigate} from "svelte-routing";
 
-    function goToMailing(){navigate("/mailing");}
+    function goToMailing(){navigate("/page/mailing");}
     function goToHome(){navigate("/");}
 </script>
 
