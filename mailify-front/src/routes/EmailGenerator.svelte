@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Request } from "../lib/interfaces/Request";
+    import type {Response} from "../lib/interfaces/Response";
     import type { FunFact } from "../lib/interfaces/FunFact";
 
     import { getRandomFunFact } from "../lib/interfaces/FunFact";
@@ -62,12 +63,13 @@
             request.purpose = activeTab;
             request.goalCategories = activeCategory;
 
-            const generatedEmail = await GenerateEmail(request); 
+            const generatedEmail = await GenerateEmail(request);
+            // ## TODO: Handle response
+
             console.log("Generated Email:", generatedEmail);
             completeProgress();
             goToResult();
         } catch (error) {
-            console.error("Error generating email:", error);
             clearIntervals();
         }
     }

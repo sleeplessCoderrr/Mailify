@@ -1,3 +1,5 @@
 export interface Response {
-    message:string;
+    personEmail:string,
+    emailSubject:string,
+    email:string;
 }

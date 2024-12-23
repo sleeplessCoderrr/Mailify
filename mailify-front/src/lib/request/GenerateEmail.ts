@@ -1,7 +1,8 @@
 import axios from 'axios';
 import type { Request } from "../interfaces/Request";
+import type { Response } from "../interfaces/Response";
 
-export async function GenerateEmail(request: Request): Promise<string> {
+export async function GenerateEmail(request: Request): Promise<Response> {
     try {
         console.log("Request sent to Flask API:", request);
 
@@ -16,7 +17,12 @@ export async function GenerateEmail(request: Request): Promise<string> {
 
         if (data != null) {
             console.log("Generated email:", data.generated_email); 
-            return data.generated_email;
+            const response: Response = {
+                'personEmail': data.person_mail,
+                'email': data.generated_email,
+                'emailSubject': data.email_subject,
+            };
+            return response;
         } else {
             console.error("No data received in response.");
             throw new Error("Failed to generate email");

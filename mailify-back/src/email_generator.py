@@ -6,36 +6,43 @@ tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForCausalLM.from_pretrained(model_path)
 generator = pipeline('text-generation', model=model, tokenizer=tokenizer)
 
+
+# Result class
+class Result:
+    def __init__(self, person_mail, generated_mail, email_subject):
+        self.person_mail = person_mail
+        self.generated_mail = generated_mail
+        self.email_subject = email_subject
+
 # Request class
 class Request:
-    def __init__(self, purpose, name, receiver, goalCategories, emailAbout):
+    def __init__(self, purpose, name, receiver, receiver_mail, goal_categories, email_about):
         self.purpose = purpose
         self.name = name
         self.receiver = receiver
-        self.goalCategories = goalCategories
-        self.emailAbout = emailAbout 
+        self.receiver_mail = receiver_mail
+        self.goal_categories = goal_categories
+        self.email_about = email_about
 
-# Email Generator Function
-def request_invoker(request: Request):
-    # Construct the prompt for the model
-    prompt = f"""
-    Write an email applying for a job:
+    def generate(self):
+        
+        result = generator(
+            prompt,
+            max_length=200,  
+            do_sample=True,  
+            early_stopping=True,
+        )
+        subject = generator(
+            prompt,
+            max_length=50,  
+            do_sample=True,  
+            early_stopping=True
+        )
 
-    Dear {request.receiver},
-
-    {request.emailAbout}
-
-    Sincerely,
-    {request.name}
-    """
-
-    # Generate the email using the loaded model
-    result = generator(
-        prompt,
-        max_length=200,  # Specify a max length to avoid overly long generations
-        do_sample=True,  # Enable sampling for more creative outputs
-        early_stopping=True,
-    )
-
-    # Return the generated text
-    return result[0]['generated_text']
+        mail = Result(
+            self.receiver_mail, 
+            result[0]['generated_text'], 
+            subject[0]['generated_text']
+        )
+        
+        return mail;
