@@ -1,5 +1,8 @@
 from flask import Blueprint, request, jsonify
 from .services import generate_chatgpt_response 
+from .model.request.request import Request
+from .model.prompt.email_prompt import generate_email_prompt
+from .model.prompt.subject_prompt import generate_subject_prompt
 
 chatgpt_bp = Blueprint('chatgpt', __name__)
 
@@ -9,26 +12,33 @@ def generate_email():
     if not data:
         return jsonify({'error': 'Invalid request. No data provided.'}), 400
 
-    purpose = data.get('purpose')
-    name = data.get('name')
-    receiver = data.get('receiver')
-    receiver_mail = data.get('receiverMail')
-    goal_categories = data.get('goalCategories')
-    email_about = data.get('emailAbout')
+    email_request = Request(
+        data.get('purpose'),
+        data.get('name'),
+        data.get('receiver'),
+        data.get('receiverMail'),
+        data.get('goalCategories'),
+        data.get('emailAbout')
+    )
 
     try:
-        message = (f"Generate an email for {purpose}. The sender is {name}, and the receiver is {receiver}. "
-                   f"The receiver's email is {receiver_mail}. The goal categories are {', '.join(goal_categories)}. "
-                   f"The email's subject should be about: {email_about}. Please generate a professional email.")
+        email_prompt = generate_email_prompt(email_request)
+        subject_prompt = generate_subject_prompt(email_request)
+        
+        # print(data)
+        # print(email_request.email_about)
+        # print(email_prompt)
+        # print(subject_prompt)
 
-        generated_email = generate_chatgpt_response(message)
-        email_subject = f"{purpose}: {email_about}"  
+        generated_email = generate_chatgpt_response(email_prompt, 300)
+        generated_subject = generate_chatgpt_response(subject_prompt, 20)
 
         return jsonify({
-            "person_email": receiver_mail,
-            "email_subject": email_subject,
+            "person_email": email_request.receiver_mail,
+            "email_subject": generated_subject,
             "generated_email": generated_email
         }), 200
+        
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

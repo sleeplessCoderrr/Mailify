@@ -18,8 +18,8 @@ export async function GenerateEmail(request: Request): Promise<Response> {
         if (data && data.person_email && data.generated_email && data.email_subject) {
             const result: Response = {
                 personEmail: data.person_email,
+                emailSubject: data.generated_subject,
                 email: data.generated_email,
-                emailSubject: data.email_subject,
             };
             console.log(result);
             return result;
