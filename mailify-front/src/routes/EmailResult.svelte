@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+
     import Navbar from "../components/Navbar.svelte";
     import Footer from "../components/Footer.svelte";
 
@@ -8,9 +10,16 @@
     import MessageTextArea from "../components/email-result/MessageTextArea.svelte";
     import MailingBackground from "../components/background/MailingBackground.svelte";
 
-    let recipient = '';
-    let subject = '';
-    let message = '';
+    export let recipient = "";
+    export let subject = "";
+    export let message = "";
+
+    onMount(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        recipient = urlParams.get("personEmail") || "";
+        subject = urlParams.get("emailSubject") || "";
+        message = urlParams.get("email") || "";
+    });
 
     const handleSend = () => {
 

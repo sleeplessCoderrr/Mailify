@@ -43,7 +43,15 @@
     let funFactInterval: ReturnType<typeof setInterval> | null = null;
 
     function setActiveCategory(category: string) { activeCategory = category; }
-    function goToResult() { navigate("/page/result"); }
+    function goToResult(recipient: string, subject: string, message: string) {
+        const queryString = new URLSearchParams({
+            recipient,
+            subject,
+            message,
+        }).toString();
+        navigate(`/page/result?${queryString}`);
+    }
+
 
     async function handleSubmit() {
         isLoading = true;
@@ -68,12 +76,10 @@
             request.purpose = activeTab;
             request.goalCategories = activeCategory;
 
-            const generatedEmail = await GenerateEmail(request);
-            // Handle response (e.g., store in a variable or navigate)
-
+            const generatedEmail: Response = await GenerateEmail(request);
             console.log("Generated Email:", generatedEmail);
             completeProgress();
-            goToResult();
+            goToResult(generatedEmail.personEmail, generatedEmail.emailSubject, generatedEmail.email);
         } catch (error) {
             console.error("Error generating email:", error);
             showError();
