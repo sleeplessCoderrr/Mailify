@@ -16,13 +16,14 @@
 
     onMount(() => {
         const urlParams = new URLSearchParams(window.location.search);
-        recipient = urlParams.get("personEmail") || "";
-        subject = urlParams.get("emailSubject") || "";
-        message = urlParams.get("email") || "";
+        recipient = urlParams.get("recipient") || "";
+        subject = urlParams.get("subject") || "";
+        message = urlParams.get("message") || "";
     });
 
     const handleSend = () => {
-
+        const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+        window.open(mailtoLink, "_blank");
     };
 
     const handleSaveDraft = () => {

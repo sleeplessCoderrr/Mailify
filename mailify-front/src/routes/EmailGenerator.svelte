@@ -44,16 +44,27 @@
 
     function setActiveCategory(category: string) { activeCategory = category; }
     function goToResult(recipient: string, subject: string, message: string) {
+        if(subject.includes("Subject: ")) subject = subject.replace(/^Subject: /g, '').trim(); 
+        if(message.includes("Subject: ")) message = message.replace(/^Subject: /g, '').trim();   
+
         const queryString = new URLSearchParams({
-            recipient,
-            subject,
-            message,
+            recipient: recipient,
+            subject: subject,
+            message: message
         }).toString();
         navigate(`/page/result?${queryString}`);
     }
 
-
+    
     async function handleSubmit() {
+        // ## Debug Purpose
+        goToResult(
+            "musk@mail.com",
+            "Subject: new job position", 
+            "Subject: i want new job position"
+        );
+
+
         isLoading = true;
         progress = 0;
         randomFact = getRandomFunFact();

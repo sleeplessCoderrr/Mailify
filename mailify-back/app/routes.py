@@ -25,6 +25,7 @@ def generate_email():
         email_prompt = generate_email_prompt(email_request)
         subject_prompt = generate_subject_prompt(email_request)
         
+        ## Debug Purpose
         # print(data)
         # print(email_request.email_about)
         # print(email_prompt)
@@ -35,7 +36,7 @@ def generate_email():
 
         return jsonify({
             "person_email": email_request.receiver_mail,
-            "email_subject": generated_subject,
+            "generated_subject": generated_subject,
             "generated_email": generated_email
         }), 200
         

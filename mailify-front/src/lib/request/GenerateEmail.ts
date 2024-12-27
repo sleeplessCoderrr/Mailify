@@ -12,17 +12,19 @@ export async function GenerateEmail(request: Request): Promise<Response> {
             },
         });
 
-        console.log("Response from Flask API:", response);
-
         const data = response.data;
-        if (data && data.person_email && data.generated_email && data.email_subject) {
+        if (data 
+            && data.person_email 
+            && data.generated_email 
+            && data.generated_subject) {
             const result: Response = {
                 personEmail: data.person_email,
                 emailSubject: data.generated_subject,
                 email: data.generated_email,
             };
+            
             console.log(result);
-            return result;
+            return result
         } else {
             console.error("Invalid response structure:", data);
             throw new Error("Failed to generate email: Invalid response structure");
