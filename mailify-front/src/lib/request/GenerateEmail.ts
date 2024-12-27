@@ -1,35 +1,34 @@
-import axios from 'axios';
+import axios from "axios";
 import type { Request } from "../interfaces/Request";
 import type { Response } from "../interfaces/Response";
 
 export async function GenerateEmail(request: Request): Promise<Response> {
     try {
         console.log("Request sent to Flask API:", request);
+
         const response = await axios.post("http://localhost:5000/generate-email", request, {
             headers: {
                 "Content-Type": "application/json",
-            }
+            },
         });
 
-        console.log("Response from Flask API:", response); 
+        console.log("Response from Flask API:", response);
+
         const data = response.data;
-
-        if (data != null) {
-            const response: Response = {
-                'personEmail': data.person_mail,
-                'email': data.generated_email,
-                'emailSubject': data.email_subject,
+        if (data && data.person_email && data.generated_email && data.email_subject) {
+            const result: Response = {
+                personEmail: data.person_email,
+                email: data.generated_email,
+                emailSubject: data.email_subject,
             };
-
-            console.log(response);
-            return response;
+            console.log(result);
+            return result;
         } else {
-            console.error("No data received in response.");
-            throw new Error("Failed to generate email");
+            console.error("Invalid response structure:", data);
+            throw new Error("Failed to generate email: Invalid response structure");
         }
-        
-    } catch (error) {
-        console.error("Error:", error); 
-        throw error;
+    } catch (error: any) {
+        console.error("Error:", error.message || error);
+        throw new Error(error.response?.data?.error || "Failed to generate email");
     }
 }

@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Request } from "../lib/interfaces/Request";
-    import type {Response} from "../lib/interfaces/Response";
+    import type { Response } from "../lib/interfaces/Response";
     import type { FunFact } from "../lib/interfaces/FunFact";
 
     import { navigate } from "svelte-routing";
@@ -88,7 +88,6 @@
         }
     }
 
-
     function completeProgress() {
         progress = 100; 
         setTimeout(() => {
@@ -127,7 +126,7 @@
         <CategoryDescription activeCategory={activeCategory} />
         <button
             class="mt-6 w-full bg-blaze/80 text-white py-2 rounded hover:bg-blaze ease-in-out duration-300"
-            on:click={handleSubmit()}>
+            on:click={handleSubmit}>
             Generate Email
         </button>
     </div>

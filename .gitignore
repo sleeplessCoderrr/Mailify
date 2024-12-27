@@ -1,4 +1,3 @@
 mailify-front/node_modules
-
-mailify-back/.env
 mailify-back/models
+mailify-back/.env
