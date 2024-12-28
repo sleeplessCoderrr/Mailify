@@ -19,7 +19,7 @@
         </button>
     </div>
     <div class="shadow-sm">
-        <p class="text-midnight">We'll never spam you.
+        <p class="text-midnight"> <b> Subscribe to us!</b> We'll never spam you.
             <a href="#" class="no-underline hover:underline">See our privacy policy</a>
         </p>
     </div>

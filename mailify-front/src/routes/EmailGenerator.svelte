@@ -58,11 +58,11 @@
     
     async function handleSubmit() {
         // ## Debug Purpose
-        goToResult(
-            "musk@mail.com",
-            "Subject: new job position", 
-            "Subject: i want new job position"
-        );
+        // goToResult(
+        //     "musk@mail.com",
+        //     "Subject: new job position", 
+        //     "Subject: i want new job position"
+        // );
 
 
         isLoading = true;
