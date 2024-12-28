@@ -8,7 +8,7 @@
     import { GenerateEmail } from "../lib/request/GenerateEmail";
 
     import Navbar from "../components/Navbar.svelte";
-    import ErrorModal from "../components/ui/ErrorModal.svelte";
+    import ErrorModal from "../components/modal/ErrorModal.svelte";
     import LoadingSpinner from "../components/ui/LoadingSpinner.svelte";
     import InputForm from "../components/email-generator/InputForm.svelte";
     import TabSelector from "../components/email-generator/TabSelector.svelte";

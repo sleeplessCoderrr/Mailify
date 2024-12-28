@@ -3,9 +3,9 @@
     import Footer from "../components/Footer.svelte";
     import HomeBackground from "../components/background/HomeBackground.svelte";
     import MailLogo from "../components/icon/MailIcon.svelte";
-    import Write from "../components/home/Write.svelte";
-    import TypeWriter from "../components/home/TypeWriter.svelte";
-    import EmailLetter from "../components/home/EmailLetter.svelte";
+    import Write from "../components/scene/Write.svelte";
+    import TypeWriter from "../components/scene/TypeWriter.svelte";
+    import EmailLetter from "../components/scene/EmailLetter.svelte";
 </script>
 
 <div class="flex-col justify-items-center items-center w-full font-helvetica">
