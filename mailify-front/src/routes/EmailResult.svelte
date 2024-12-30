@@ -34,7 +34,6 @@
         const mailtoLink = `https://outlook.office.com/mail/deeplink/compose?to=${recipient}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
         window.open(mailtoLink, "_blank");
     }
-
 </script>
 
 <div class="min-h-screen bg-transparent text-midnight font-helvetica">
