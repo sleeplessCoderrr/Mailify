@@ -45,11 +45,7 @@ export const funFacts: FunFact[] = [
       detail: "Every 'no' is a step closer to your first 'yes.' Keep going!"
     }
 ];
-  
-export const getFunFacts = (): FunFact[] => {
-    return funFacts;
-};
-  
+
 export const getRandomFunFact = (): FunFact => {
     const randomIndex = Math.floor(Math.random() * funFacts.length);
     return funFacts[randomIndex];
