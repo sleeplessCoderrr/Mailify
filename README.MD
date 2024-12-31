@@ -2,7 +2,7 @@
 
 A full-stack application that uses a machine learning model for text prediction and sentiment analysis.
 
-## Setup
+## Manual Setup
 
 ### Backend (Flask)
 1. Navigate to the `mailify-back/` folder.
