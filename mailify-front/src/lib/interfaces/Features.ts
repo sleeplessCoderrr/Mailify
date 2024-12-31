@@ -1,23 +1,23 @@
 export interface Feature {
-    emoji:string,
+    icon:string,
     title:string,
     description:string,
 }
 
 export const features: Feature[] = [
     {
-        emoji: '💼',
-        title: 'Job Applications',
-        description: 'Stand out with personalized follow-ups and thank you notes that show your personality while staying professional.'
+        "icon": "fa-solid fa-star",
+        "title": "Gen Z Focused Design",
+        "description": "Intuitive, user-friendly interface designed specifically for the modern job seeker. Clean, bold, and easy to navigate—just the way you like it!"
     },
     {
-        emoji: '🎓',
-        title: 'School Emails',
-        description: 'Craft perfect emails to professors and advisors. Get extensions, recommendations, or clarify assignments.'
+        "icon": "fa-solid fa-pen",
+        "title": "Customization Made Simple",
+        "description": "Easily tweak your emails to match your personal tone and style. Stand out by adding your unique voice to every message."
     },
     {
-        emoji: '✨',
-        title: 'Gen Z Voice',
-        description: 'Our AI understands your voice. No more stuffy corporate speak - just your authentic self in a professional way.'
+        "icon": "fa-solid fa-clock",
+        "title": "Time-Saving Efficiency",
+        "description": "Spend less time worrying about email writing and more time applying for jobs. Get send-ready emails in just minutes!"
     }
 ];
