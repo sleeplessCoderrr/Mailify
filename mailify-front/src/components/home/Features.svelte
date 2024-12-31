@@ -2,9 +2,9 @@
     import { features } from "../../lib/interfaces/Features";
 </script>
 
-<div class="w-3/4 mt-48 mb-24 flex flex-col justify-items-center align-middle text-center gap-12">
+<div class="w-4/6 mt-48 mb-24 flex flex-col justify-items-center align-middle text-center gap-12">
     <div>
-        <p class="font-bold text-5xl mb-4">Why Choose Mailify?</p>
+        <p class="font-bold text-4xl mb-4">Why Choose Mailify?</p>
         <p class="text-lg">Highlight the core benefits and functionality of Mailify.</p>
     </div>
     <div class="grid grid-cols-3 gap-8">
@@ -14,7 +14,7 @@
                 <h3 class="text-xl font-bold text-primary mb-4">
                     {feature.title}
                 </h3>
-                <p class="text-gray-600">
+                <p class="text-midnight">
                     {feature.description}
                 </p>
             </div>

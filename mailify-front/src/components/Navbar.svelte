@@ -10,14 +10,14 @@
 <header class="flex flex-row gap-48 justify-evenly items-center h-36 mx-auto font-helvetica">
     <div class="flex flex-row items-center gap-4">
         <img src={logoLight} class="w-14" alt="logo"/>
-        <button on:click={goToHome()} class="font-bold text-3xl">Mailify</button>
+        <button on:click={goToHome} class="font-bold text-3xl">Mailify</button>
     </div>
 
     <div class="items-center bg-mist/20 py-2 px-12 rounded-md backdrop-blur-sm shadow-md border-2 border-stone-300">
         <ul class="flex gap-8">
             <a href="#" class="no-underline">Features</a>
             <a href="#" class="no-underline">Privacy Policy</a>
-            <a href="#" class="no-underline">Terms of Services</a>
+            <a href="#" class="no-underline">FAQ</a>
             <a href="#" class="no-underline">Contact Us</a>
         </ul>
     </div>
