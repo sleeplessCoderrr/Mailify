@@ -41,7 +41,7 @@
     <MailingBackground/>
     <SendModal isVisible={isVisible} title={title} onGmail={handleGmail} onOutlook={handleOutlook} />
 
-    <div class="flex flex-col gap-10 max-w-screen-lg mx-auto p-8 bg-white/20 shadow-lg backdrop-blur-sm rounded-md border-2 border-stone-300">
+    <div class="flex flex-col gap-10 max-w-screen-lg mx-auto p-8 bg-white/20 mb-24 mt-6 shadow-lg backdrop-blur-sm rounded-md border-2 border-stone-300">
         <div class="flex align-middle justify-items-center px-4ww w-full">
             <h3 class="mx-auto text-xl font-bold">Here Are Your Generated Email</h3>
         </div>
@@ -57,6 +57,5 @@
             <span class="text-sm text-gray-500">@Mailify</span>
         </div>
     </div>
-
     <Footer/>
 </div>

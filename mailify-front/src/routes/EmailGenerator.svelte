@@ -8,6 +8,7 @@
     import { GenerateEmail } from "../lib/request/GenerateEmail";
 
     import Navbar from "../components/Navbar.svelte";
+    import Footer from "../components/Footer.svelte";
     import ErrorModal from "../components/modal/ErrorModal.svelte";
     import LoadingSpinner from "../components/ui/LoadingSpinner.svelte";
     import InputForm from "../components/email-generator/InputForm.svelte";
@@ -127,7 +128,7 @@
     <MailingBackground />
     <Navbar />
 
-    <div class="max-w-screen-md mx-auto p-8 bg-white/20 shadow-lg backdrop-blur-sm rounded-md border-2 border-stone-300">
+    <div class="max-w-screen-md mx-auto p-8 bg-white/20 shadow-lg backdrop-blur-sm rounded-md border-2 border-stone-300 mb-24">
         <TabSelector activeTab={activeTab} setActiveTab={(tab) => (activeTab = tab)} />
         <InputForm activeTab={activeTab} request={request} />
         <CategorySelector
@@ -141,4 +142,5 @@
             Generate Email
         </button>
     </div>
+    <Footer />
 </div>
