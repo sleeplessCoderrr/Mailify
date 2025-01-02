@@ -2,11 +2,12 @@ import axios from "axios";
 import type { Request } from "../interfaces/Request";
 import type { Response } from "../interfaces/Response";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 export async function GenerateEmail(request: Request): Promise<Response> {
     try {
         console.log("Request sent to Flask API:", request);
 
-        const response = await axios.post("http://localhost:5000/generate-email", request, {
+        const response = await axios.post(`${BASE_URL}/generate-email`, request, {
             headers: {
                 "Content-Type": "application/json",
             },
@@ -24,7 +25,7 @@ export async function GenerateEmail(request: Request): Promise<Response> {
             };
             
             console.log(result);
-            return result
+            return result;
         } else {
             console.error("Invalid response structure:", data);
             throw new Error("Failed to generate email: Invalid response structure");
@@ -34,3 +35,4 @@ export async function GenerateEmail(request: Request): Promise<Response> {
         throw new Error(error.response?.data?.error || "Failed to generate email");
     }
 }
+
