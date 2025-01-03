@@ -1,26 +1,63 @@
-version: "3.8"
-
 services:
-  backend:
-    build: ./mailify-back
-    container_name: backend
+  # Rust Backend
+  rust-backend:
+    build:
+      context: ./mailify-backend
+      dockerfile: Dockerfile
+    container_name: rust-backend
     ports:
-      - "5000:5000" 
+      - "3030:3030"
     environment:
-      - FLASK_APP=run.py
-      - FLASK_DEBUG=0
+      - DATABASE_URL=mysql://user:password@mysql-db/mailify
+    depends_on:
+      - mysql-db
     networks:
       - app-network
 
+  # Flask Backend
+  flask-backend:  # Updated name to match references
+    build: ./mailify-api
+    container_name: flask-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=run.py
+      - FLASK_DEBUG=0
+    depends_on:
+      - mysql-db
+    networks:
+      - app-network
+
+  # Frontend (Svelte)
   frontend:
     build: ./mailify-front
     container_name: frontend
     ports:
-      - "80:80" 
+      - "80:80"
     depends_on:
-      - backend
+      - flask-backend  # Fixed service name
+      - rust-backend
     networks:
       - app-network
+
+  # MySQL Database
+  mysql-db:
+    image: mysql:latest
+    container_name: mysql-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: mailify
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+volumes:
+  mysql_data:
 
 networks:
   app-network:
