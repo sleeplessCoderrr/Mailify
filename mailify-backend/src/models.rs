@@ -4,16 +4,11 @@ use serde::{Deserialize, Serialize};
 pub struct User {
     pub id: i32,
     pub username: String,
+    pub password_hash: String,
 }
 
 #[derive(Deserialize)]
-pub struct RegisterRequest {
-    pub username: String,
-    pub password: String,
-}
-
-#[derive(Deserialize)]
-pub struct LoginRequest {
+pub struct AuthRequest {
     pub username: String,
     pub password: String,
 }
@@ -21,7 +16,7 @@ pub struct LoginRequest {
 #[derive(Serialize, sqlx::FromRow)]
 pub struct Email {
     pub id: i32,
-    pub subject: String,
-    pub receiver: String,
-    pub message: String,
+    pub subject: Option<String>, 
+    pub receiver: Option<String>,
+    pub message: Option<String>,
 }

@@ -2,3 +2,4 @@ mailify-front/node_modules
 mailify-api/models
 mailify-api/.env
 mailify-backend/target
+mailify-backend/.env

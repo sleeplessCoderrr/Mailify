@@ -3,23 +3,25 @@ use axum::{
     http::StatusCode,
     Json,
 };
-use sqlx::MySqlPool;
 
+use sqlx::MySqlPool;
 use crate::models::Email;
 
 pub async fn add_email(
     State(pool): State<MySqlPool>,
     Json(payload): Json<Email>,
 ) -> Result<Json<Email>, StatusCode> {
-    let result = sqlx::query_as!(
-        Email,
-        "INSERT INTO emails (user_id, subject, receiver, message) VALUES (?, ?, ?, ?)
-         RETURNING id, subject, receiver, message",
-        payload.user_id, payload.subject, payload.receiver, payload.message
+    let result = sqlx::query!(
+        "INSERT INTO emails (user_id, subject, receiver, message) VALUES (?, ?, ?, ?)",
+        payload.user_id,
+        payload.subject,
+        payload.receiver,
+        payload.message
     )
-    .fetch_one(&pool)
-    .await
-    .map_err(|_| StatusCode::BAD_REQUEST)?;
+    .execute(&pool)
+    .await.map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+    
+    let last_insert_id = result.last_insert_id();
 
     Ok(Json(result))
 }

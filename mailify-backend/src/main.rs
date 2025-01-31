@@ -1,6 +1,3 @@
-fn main() {
-    println!("Hello, world!");
-}
 mod db;
 mod models;
 mod routes;
@@ -9,6 +6,7 @@ use axum::{routing::post, Router};
 use dotenvy::dotenv;
 use routes::{auth::*, email::*};
 use std::net::SocketAddr;
+use crate::routes::email::add_email;
 
 #[tokio::main]
 async fn main() {
