@@ -1,30 +1,16 @@
-mod db;
-mod models;
-mod routes;
-
-use axum::{routing::post, Router};
-use dotenvy::dotenv;
-use routes::{auth::*, email::*};
-use std::net::SocketAddr;
-use crate::routes::email::add_email;
+use sqlx::mysql::MySqlPool;
+use std::env;
+use dotenv::dotenv;
+use tokio;
 
 #[tokio::main]
 async fn main() {
     dotenv().ok();
-    let pool = db::establish_connection().await;
 
-    let app = Router::new()
-        .route("/register", post(register_user))
-        .route("/login", post(login_user))
-        .route("/emails", post(add_email))
-        .route("/emails/:user_id", post(get_emails_by_user))
-        .with_state(pool);
+    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
-    println!("Server running at http://{}", addr);
-
-    axum::Server::bind(&addr)
-        .serve(app.into_make_service())
-        .await
-        .unwrap();
+    match MySqlPool::connect(&database_url).await {
+        Ok(_) => println!("✅ Successfully connected to the database!"),
+        Err(err) => eprintln!("❌ Failed to connect: {}", err),
+    }
 }
