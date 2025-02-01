@@ -1,2 +1,3 @@
-pub mod User;
-pub mod AuthRequest;
+pub mod user;
+pub mod auth_request;
+pub mod auth_response;

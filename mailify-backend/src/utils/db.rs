@@ -1,6 +1,8 @@
-use sqlx::{MySqlPool, Error}
+use std::env;
+use sqlx::{MySqlPool, Error};
 
-pub async fn connect_db() -> MySqlPool{
-    let database_url = std::env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    MySqlPool::connect(&database_url).await.expect("Failed to connect to database")
+pub async fn connect_db() -> Result<MySqlPool, Error> {
+    let database_url = env::var("DATABASE_URL")
+        .map_err(|_| Error::Configuration("DATABASE_URL not set".into()))?;
+    MySqlPool::connect(&database_url).await
 }
