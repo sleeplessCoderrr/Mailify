@@ -3,3 +3,4 @@ src-model/models
 src-model/.env
 src-tauri/target
 src-tauri/.env
+.env
