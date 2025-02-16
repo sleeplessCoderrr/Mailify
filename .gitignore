@@ -1,5 +1,5 @@
 node_modules
-mailify-api/models
-mailify-api/.env
-mailify-backend/target
-mailify-backend/.env
+src-model/models
+src-model/.env
+src-tauri/target
+src-tauri/.env
